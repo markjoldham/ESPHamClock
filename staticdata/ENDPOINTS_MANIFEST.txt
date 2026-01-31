@@ -1,0 +1,62 @@
+HamClock Backend Server Endpoints
+==================================
+Documented: January 31, 2026
+Status: All endpoints returning 404 Not Found
+
+Base URL: https://clearskyinstitute.com
+
+SPACE WEATHER ENDPOINTS:
+------------------------
+/Bz/Bz.txt                              - Magnetic field Bz/Bt data
+/solar-wind/swind-24hr.txt              - Solar wind information (24 hour window)
+/ssn/ssn-31.txt                         - Sunspot numbers (31 day history)
+/solar-flux/solarflux-99.txt            - Solar flux data (99 day history)
+/drap/stats.txt                         - D-Region Absorption Prediction statistics
+/geomag/kindex.txt                      - Planetary K-index
+/xray/xray.txt                          - X-ray flux data
+/NOAASpaceWX/noaaswx.txt                - NOAA space weather summary
+/NOAASpaceWX/rank2_coeffs.txt           - Space weather ranking coefficients
+/aurora/aurora.txt                      - Aurora activity data
+/dst/dst.txt                            - Disturbance Storm Time index
+
+WEATHER ENDPOINTS:
+------------------
+/worldwx/wx.txt                         - Gridded world weather table
+/wx.pl?lat=<lat>&lng=<lng>&is_de=<0|1> - Weather for specific location (CGI)
+
+HAM RADIO RESOURCE ENDPOINTS:
+------------------------------
+/cty/cty_wt_mod-ll-dxcc.txt             - Country/prefix database with lat/lng/DXCC
+/cities2.txt                            - Cities database for map display
+/contests/contests311.txt               - Contest calendar data
+/ONTA/onta.txt                          - "On The Air" activities (POTA/SOTA)
+/dxpeds/dxpeditions.txt                 - DXpedition information
+
+PROPAGATION ENDPOINTS:
+----------------------
+/fetchBandConditions.pl                 - VOACAP band conditions/propagation models (CGI)
+
+UTILITY ENDPOINTS:
+------------------
+/fetchIPGeoloc.pl                       - IP geolocation service (CGI)
+/version.pl                             - Version checking for OTA updates (CGI)
+/RSS/web15rss.pl                        - RSS feed aggregator (CGI)
+
+NOTES:
+------
+- All static .txt files returned 404 errors when checked
+- CGI scripts (.pl files) were not tested as they require specific parameters
+- The server is online but the HamClock-specific content is no longer available
+- Frontend code in src/ contains the parsing logic for each data format
+- See src/wifi.cpp for backend_host and backend_port definitions
+- See individual source files for endpoint usage:
+  * src/spacewx.cpp - Space weather endpoints
+  * src/wx.cpp - Weather endpoints
+  * src/wifi.cpp - Band conditions, IP geolocation
+  * src/contests.cpp - Contest calendar
+  * src/ontheair.cpp - ONTA data
+  * src/dxpeds.cpp - DXpedition data
+  * src/cities.cpp - Cities database
+  * src/prefixes.cpp - Country/prefix database
+  * src/rss.cpp - RSS feeds
+  * src/OTAupdate.cpp - Version checking
